@@ -1,0 +1,38 @@
+{% macro render_field_with_bootstrap_errors(field) %}
+  <div class="mb-3 input_parent">
+    {{ field.label }} {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{% macro render_remember_with_bootstrap_errors(field) %}
+  <div class="form-check mb-3">
+    <label class="form-check-label">
+      {{ field(**kwargs)|safe }} Remember me
+    </label>
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+
+
+<!-- this dynamic macro with BS and HTML5 to add more control on parent using data attributes and bootstrap --> 
+{% macro render_bootstrap_field(field) %}
+  <div {% if "data_parent_class" in kwargs %}class="{{kwargs['data_parent_class']}}"{% endif %}>{{ field(**kwargs)|safe }}</div>
+{% endmacro %}
+
+
+
+{% macro render_field(field) %}
+  <div>{{ field(**kwargs)|safe }}</div>
+{% endmacro %}
